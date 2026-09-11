@@ -74,45 +74,47 @@ function game() {
         "Click OK when you're ready to begin!"
     );
 
-let playerScore = 0;
-let computerScore = 0;
-let roundNumber = 1;
+    let playerScore = 0;
+    let computerScore = 0;
+    let roundNumber = 1;
 
-while (playerScore < 3 && computerScore < 3) {
-    console.log(`--- Round ${roundNumber} ---`);
+    while (playerScore < 3 && computerScore < 3) {
+        console.log(`--- Round ${roundNumber} ---`);
 
-    const playerSelection = getPlayerChoice();
+        const playerSelection = getPlayerChoice();
 
-    if (playerSelection === null) {
-        console.log("You cancelled the game. The evil AI wins this time!");
-        alert("Game cancelled.");
-        return;
+        if (playerSelection === null) {
+            console.log("You cancelled the game. The evil AI wins this time!");
+            alert("Game cancelled.");
+            return;
+        }
+
+        const computerSelection = computerPlay();
+
+        console.log(`You chose: ${playerSelection}`);
+        console.log(`AI chose: ${computerSelection}`);
+
+        const roundWinner = playRound(playerSelection, computerSelection);
+
+        if (roundWinner === "player") {
+            playerScore++;
+        } else if (roundWinner === "computer") {
+            computerScore++;
+        }
+
+        console.log(`Score: You ${playerScore} - AI ${computerScore}`);
+
+        roundNumber++;
     }
 
-    const computerSelection = computerPlay();
-
-    console.log(`You chose: ${playerSelection}`);
-    console.log(`AI chose: ${computerSelection}`);
-
-    const roundWinner = playRound(playerSelection, computerSelection);
-
-    if (roundWinner === "player") {
-        playerScore++;
-    } else if (roundWinner === "computer") {
-        computerScore++;
+    if (playerScore === 3) {
+        console.log("Congratulations! You defeated the evil AI!");
+        alert("You won the game! You defeated the evil AI!");
+    } else {
+        console.log("The evil AI won the game!");
+        alert("The evil AI won this time!");
     }
-
-    console.log(`Score: You ${playerScore} - AI ${computerScore}`);
-
-    roundNumber++;
 }
 
-if (playerScore === 3) {
-    console.log("Congratulations! You defeated the evil AI!");
-    alert("You won the game! You defeated the evil AI!");
-} else {
-    console.log("The evil AI won the game!");
-    alert("The evil AI won this time!");
-}
 // Start the game
 game();
