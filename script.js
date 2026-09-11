@@ -31,10 +31,26 @@ const playRound = (playerSelection, computerSelection) => {
 };
 
 function getPlayerChoice() {
-    let playerChoice = prompt("Enter your choice (Rock, Paper, or Scissors):");
-    return playerChoice;
-}
+    while (true) {
+        let playerChoice = prompt("Enter your choice (Rock, Paper, or Scissors):");
 
+        if (playerChoice === null) {
+            return null;
+        }
+
+        playerChoice = playerChoice.trim().toLowerCase();
+
+        if (
+            playerChoice === "rock" ||
+            playerChoice === "paper" ||
+            playerChoice === "scissors"
+        ) {
+            return playerChoice;
+        }
+
+        alert("Invalid choice. Please enter Rock, Paper, or Scissors.");
+    }
+}
 // Function to call another round of the game until the player or computer wins
 function game() {
     console.log("%c ROCK PAPER SCISSORS", "font-size: 16px; font-weight: bold;");
@@ -58,17 +74,45 @@ function game() {
         "Click OK when you're ready to begin!"
     );
 
-    let playerScore = 0;
-    let computerScore = 0;
-    let roundNumber = 1;
+let playerScore = 0;
+let computerScore = 0;
+let roundNumber = 1;
+
+while (playerScore < 3 && computerScore < 3) {
+    console.log(`--- Round ${roundNumber} ---`);
 
     const playerSelection = getPlayerChoice();
 
+    if (playerSelection === null) {
+        console.log("You cancelled the game. The evil AI wins this time!");
+        alert("Game cancelled.");
+        return;
+    }
 
     const computerSelection = computerPlay();
 
-    playRound(playerSelection, computerSelection);
+    console.log(`You chose: ${playerSelection}`);
+    console.log(`AI chose: ${computerSelection}`);
+
+    const roundWinner = playRound(playerSelection, computerSelection);
+
+    if (roundWinner === "player") {
+        playerScore++;
+    } else if (roundWinner === "computer") {
+        computerScore++;
+    }
+
+    console.log(`Score: You ${playerScore} - AI ${computerScore}`);
+
+    roundNumber++;
 }
 
+if (playerScore === 3) {
+    console.log("Congratulations! You defeated the evil AI!");
+    alert("You won the game! You defeated the evil AI!");
+} else {
+    console.log("The evil AI won the game!");
+    alert("The evil AI won this time!");
+}
 // Start the game
 game();
