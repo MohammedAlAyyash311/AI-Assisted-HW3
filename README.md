@@ -1,3 +1,5 @@
 # AI-Assisted-HW3
 
 This assignment is a text-based, "first to three wins" Rock, Paper, Scissors game in JavaScript that plays against an "evil AI" opponent using browser dialogs and the developer console.It focuses heavily on writing clean code logic to handle edge cases such as case-insensitive inputs, accidental spaces, invalid choices, and user cancellation without crashing the program. Additionally, it requires you to provide a strong user experience by giving clear instructions on how to open and use the browser console before the game begins.
+
+https://mohammedalayyash311.github.io/AI-Assisted-HW3/
